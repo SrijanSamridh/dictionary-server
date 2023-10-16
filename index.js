@@ -10,7 +10,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:8080", "https://dictionary-server-six.vercel.app"],
+    origin: [
+      "http://localhost:8080",
+      "https://dictionary-server-six.vercel.app",
+      "http://127.0.0.1:5500", // Add your local origin
+    ],
     credentials: true,
   })
 );
