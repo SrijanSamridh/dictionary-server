@@ -46,5 +46,37 @@ authRouter.post("/auth/register", async (req, res) => {
   }
 });
 
+authRouter.post("/auth/login", async (req, res) => {
+  try {
+    // validate request
+    const { email, password } = req.body;
+    if(!email || !password) {
+      return res.status(400).send({ message: "Please provide email and password!" });
+    }
+
+    // check if user exists
+    const user = await User.findOne({ email });
+    if(!user) {
+      return res.status(400).send({ message: "Invalid email or password!" });
+    }
+
+    // check if password is correct
+    const isMatch = await bcrypt.compare(password, user.password);
+    if(!isMatch) {
+      return res.status(400).send({ message: "Invalid email or password!" });
+    }
+
+
+    // send response
+    res.send({
+        message : "User logged in successfully!",
+        user
+    });
+  } catch (error) {
+    console.log(`Error: ${error.message}`);
+    res.status(500).send({ message: error.message });
+  }
+});
+
 
 module.exports = authRouter;
