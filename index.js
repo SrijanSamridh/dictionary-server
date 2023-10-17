@@ -14,7 +14,7 @@ app.use(
       "http://localhost:8080",
       "https://dictionary-server-six.vercel.app",
       "https://dictionary.srijansamridh.tech",
-      "http://127.0.0.1:5500", // Add your local origin
+      "http://127.0.0.1:5500",
     ],
     credentials: true,
   })

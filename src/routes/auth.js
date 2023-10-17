@@ -57,13 +57,13 @@ authRouter.post("/auth/login", async (req, res) => {
     // check if user exists
     const user = await User.findOne({ email });
     if(!user) {
-      return res.status(400).send({ message: "Invalid email or password!" });
+      return res.status(400).send({ message: "Invalid Email" });
     }
 
     // check if password is correct
     const isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch) {
-      return res.status(400).send({ message: "Invalid email or password!" });
+      return res.status(400).send({ message: "Invalid Password!" });
     }
 
 
